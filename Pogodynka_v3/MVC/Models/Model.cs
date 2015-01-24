@@ -15,17 +15,26 @@ namespace Pogodynka_v3
         protected List<View> subscribers;
         public void addSubscriber(View view)
         {
-            subscribers.Add(view);
+            lock (Globals.CriticalSection)
+            {
+                subscribers.Add(view);
+            }
         }
         public void delSubscriber(View view)
         {
-            subscribers.Remove(view);
+            lock (Globals.CriticalSection)
+            {
+                subscribers.Remove(view);
+            }
         }
         protected void NotifySubscribers()
         {
-            foreach (View view in subscribers)
+            lock (Globals.CriticalSection)
             {
-                view.updateView(parameters);
+                foreach (View view in subscribers)
+                {
+                    view.updateView(parameters);
+                }
             }
         }
 

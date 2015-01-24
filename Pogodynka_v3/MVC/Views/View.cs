@@ -7,7 +7,7 @@ namespace Pogodynka_v3
 {
     public abstract class View
     {
-        public abstract List<string> getModelsBeingViewed();
+        public abstract bool isModelBeingViewed(string modelID);
 
 
         public abstract void delDataFromView(string modelID);

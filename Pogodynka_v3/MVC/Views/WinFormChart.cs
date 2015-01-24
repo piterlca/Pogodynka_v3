@@ -23,7 +23,14 @@ namespace Pogodynka_v3
         }
         private void delSeriesFromChart(string seriesName)
         {
-            chart.Series.Remove(chart.Series[seriesName]);
+            try
+            {
+                chart.Series.Remove(chart.Series[seriesName]);
+            }
+
+            catch(System.ArgumentException)
+            {
+            }
         }
 
         public override void updateView(ModelData Parameters)
@@ -67,14 +74,17 @@ namespace Pogodynka_v3
             return false;
         }
 
-        public override List<string> getModelsBeingViewed()
+        public override bool isModelBeingViewed(string modelID)
         {
-            List<string> models = new List<string>();
             foreach(Series series in chart.Series)
             {
-                models.Add(series.Name);
+                if (series.Name == modelID)
+                {
+                    return true;
+                }
             }
-            return models;
+
+            return false;
         }
     }
 }

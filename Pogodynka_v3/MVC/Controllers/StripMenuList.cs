@@ -8,15 +8,12 @@ namespace Pogodynka_v3
 {
     public class StripMenuList : Controller
     {
-        WinFormChart properView;
         List<ToolStripMenuItem> MenuItems =new List<ToolStripMenuItem>();
         ToolStripMenuItem ParentMenuItem = new ToolStripMenuItem();
 
         public StripMenuList(View view)
         {
-            properView = (WinFormChart)view;
-            ViewUsed = (WinFormChart)properView;
-
+            ViewUsed = view;
         }
 
         public void BindToMenuAndInit(ToolStripMenuItem menuPassed)
@@ -40,9 +37,9 @@ namespace Pogodynka_v3
         private void On_Item_Clicked(object sender, EventArgs e)
         {
             ToolStripMenuItem ItemClicked = (ToolStripMenuItem)sender;
-            string seriesName = ItemClicked.Text;
+            string modelID = ItemClicked.Text;
 
-            if (!properView.isSeriesDisplayed(seriesName))
+            if (!ViewUsed.isModelBeingViewed(modelID))
             {
                 executeCommand(ItemClicked.Text.ToLower() + "ADD" );
             }
@@ -50,8 +47,7 @@ namespace Pogodynka_v3
             {
                 executeCommand(ItemClicked.Text.ToLower() + "DEL");
             }
-
-            ItemClicked.Checked = properView.isSeriesDisplayed(seriesName);
+            ItemClicked.Checked = ViewUsed.isModelBeingViewed(modelID);
         }
 
     }
