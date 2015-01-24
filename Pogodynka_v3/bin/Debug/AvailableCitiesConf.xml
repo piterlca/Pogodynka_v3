@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<content>
+	<item>
+		<City>Wroclaw</City>
+		<PathToReport>http://rss.theweathernetwork.com/weather/plxx0003</PathToReport>
+	</item>
+
+	<item>
+		<City>Poznan</City>
+		<PathToReport>http://rss.theweathernetwork.com/weather/plxx0004</PathToReport>
+	</item>
+
+	<item>
+		<City>Warszawa</City>
+		<PathToReport>http://rss.theweathernetwork.com/weather/plxx0028</PathToReport>
+	</item>
+
+	<item>
+		<City>Krakow</City>
+		<PathToReport>http://rss.theweathernetwork.com/weather/plxx0001</PathToReport>
+	</item>
+</content>
