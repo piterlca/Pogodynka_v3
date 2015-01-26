@@ -19,8 +19,8 @@ namespace Pogodynka_v3
             pathToSource = path;
             subscribers = new List<View>();
             Thread thread = new Thread(threadAction);
+            thread.IsBackground = true;
             thread.Start();
-
         }
 
         private string pathToSource;

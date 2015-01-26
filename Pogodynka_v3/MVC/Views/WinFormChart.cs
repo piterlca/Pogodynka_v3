@@ -18,7 +18,7 @@ namespace Pogodynka_v3
         {
             chart.Series.Add(seriesName);
             chart.Series[seriesName].ChartArea = "ChartArea1";
-            chart.Series[seriesName].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chart.Series[seriesName].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             chart.Series[seriesName].BorderWidth = 5;
         }
         private void delSeriesFromChart(string seriesName)

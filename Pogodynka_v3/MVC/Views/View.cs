@@ -9,7 +9,6 @@ namespace Pogodynka_v3
     {
         public abstract bool isModelBeingViewed(string modelID);
 
-
         public abstract void delDataFromView(string modelID);
         public abstract void updateView(ModelData Parameters);
 
