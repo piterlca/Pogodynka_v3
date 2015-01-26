@@ -18,7 +18,7 @@ namespace Pogodynka_v3
         {
             chart.Series.Add(seriesName);
             chart.Series[seriesName].ChartArea = "ChartArea1";
-            chart.Series[seriesName].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            chart.Series[seriesName].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             chart.Series[seriesName].BorderWidth = 5;
         }
         private void delSeriesFromChart(string seriesName)
@@ -35,7 +35,10 @@ namespace Pogodynka_v3
 
         public override void updateView(ModelData Parameters)
         {
-            if (chart == null) return;
+            if (chart.IsDisposed == true)
+            {
+                return;
+            }
             chart.Invoke(new updateViewDelegate(updateChart), new object[] {Parameters});
         }
         private delegate void updateViewDelegate(ModelData Parameters);
@@ -83,7 +86,6 @@ namespace Pogodynka_v3
                     return true;
                 }
             }
-
             return false;
         }
     }

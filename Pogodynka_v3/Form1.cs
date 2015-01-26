@@ -19,5 +19,6 @@ namespace Pogodynka_v3
             ReadFromRss.InitModels();
             defaultController.BindToMenuAndInit(chooseCityToolStripMenuItem);
         }
+
     }
 }

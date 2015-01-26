@@ -13,16 +13,7 @@ namespace Pogodynka_v3
 {
     class ReadFromRss : Model
     {
-        private ReadFromRss(string name, string path)
-        {
-            this.model_ID = name;
-            pathToSource = path;
-            subscribers = new List<View>();
-            Thread thread = new Thread(threadAction);
-            thread.IsBackground = true;
-            thread.Start();
-        }
-
+        
         private string pathToSource;
 
         public static void InitModels()
@@ -34,6 +25,26 @@ namespace Pogodynka_v3
             }
         }
 
+        protected override void measure()
+        {
+            //object LastestData;
+            List<Temperature> results = getTemperatureFromRss();
+            if (results != null)
+                parameters = new ModelData(model_ID, results);
+
+        }
+
+        private ReadFromRss(string name, string path)
+        {
+            this.model_ID = name;
+            pathToSource = path;
+            subscribers = new List<View>();
+            measurePeriodInMiliseconds = 50;
+            Thread thread = new Thread(threadAction);
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
         private static List<City> LoadConfiguration(string ConfigurationPath)
         {
             List<City> Cities = new List<City>();
@@ -43,16 +54,6 @@ namespace Pogodynka_v3
                 Cities.Add(new City(node["City"].InnerText, node["PathToReport"].InnerText));
             }
             return Cities;
-        }
-
-
-        public override void measure()
-        {
-            object LastestData;
-            List<Temperature> results =  getTemperatureFromRss();
-            if(results != null)
-            parameters = new ModelData(model_ID,results);
-            
         }
 
         private List<Temperature> getTemperatureFromRss()
@@ -173,17 +174,6 @@ namespace Pogodynka_v3
         }
         private enum States { TEMPERATURE, WHITE, MARK, Deg, dEg, STORE, MINUS };
 
-        private void threadAction()
-        {
-            while (true)
-            {
-                measure();
-                if (parameters != null)
-                {
-                    NotifySubscribers();
-                }
-                Thread.Sleep(0);
-            }
-        }
+
     }
 }
