@@ -11,6 +11,7 @@ namespace Pogodynka_v3
 
         public abstract void delDataFromView(string modelID);
         public abstract void updateView(ModelData Parameters);
+        protected delegate void updateViewDelegate(ModelData Parameters);
 
     }
 }

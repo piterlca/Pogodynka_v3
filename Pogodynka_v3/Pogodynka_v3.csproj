@@ -61,7 +61,11 @@
     </Compile>
     <Compile Include="MVC\Controllers\StripMenuList.cs" />
     <Compile Include="MVC\Models\Model.cs" />
-    <Compile Include="MVC\Models\ReadFromRss.cs" />
+    <Compile Include="MVC\Models\RssReporter\RssReporter.cs" />
+    <Compile Include="MVC\Models\RssReporter\RssChannelConfiguration.cs" />
+    <Compile Include="MVC\Models\RssReporter\TemperatureRetriever.cs" />
+    <Compile Include="MVC\Models\SubscribersManager.cs" />
+    <Compile Include="MVC\Models\ThreadForModels.cs" />
     <Compile Include="MVC\Views\WinFormChart.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

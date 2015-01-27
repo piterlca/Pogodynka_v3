@@ -41,7 +41,7 @@ namespace Pogodynka_v3
             }
             chart.Invoke(new updateViewDelegate(updateChart), new object[] {Parameters});
         }
-        private delegate void updateViewDelegate(ModelData Parameters);
+
         private void updateChart(ModelData Parameters)
         {
             try

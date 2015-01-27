@@ -16,7 +16,7 @@ namespace Pogodynka_v3
             InitializeComponent();
 
             StripMenuList defaultController = new StripMenuList( new WinFormChart(ref chart1) );
-            ReadFromRss.InitModels();
+            RssReporter.InitModels();
             defaultController.BindToMenuAndInit(chooseCityToolStripMenuItem);
         }
 

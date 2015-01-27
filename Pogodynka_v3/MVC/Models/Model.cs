@@ -6,37 +6,28 @@ using System.Threading;
 
 namespace Pogodynka_v3
 {
-    abstract class Model
+    public abstract class Model
     {
         protected string model_ID;
         protected int measurePeriodInMiliseconds;
         protected ModelData parameters;
-        protected List<View> subscribers; 
+        public SubscribersManager SubManager;
         protected static List<Model> models = new List<Model>();
+        protected ThreadForModels measuringThread;
 
-        protected abstract void measure();
+        public Model()
+        {
+            SubManager = new SubscribersManager();
+            measuringThread = new ThreadForModels(this, measurePeriodInMiliseconds);
+        }
+
+        public abstract void measure();
 
         public void requestLatestData(View viewToNotify)
         {
             List<View> viewsToNotify = new List<View>();
             viewsToNotify.Add(viewToNotify);
             NotifySubscribers(viewsToNotify);
-        }
-
-        public void addSubscriber(View view)
-        {
-            lock (Globals.CriticalSection)
-            {
-                subscribers.Add(view);
-            }
-        }
-
-        public void delSubscriber(View view)
-        {
-            lock (Globals.CriticalSection)
-            {
-                subscribers.Remove(view);
-            }
         }
 
         public static List<string> getAvailableModels()
@@ -49,7 +40,6 @@ namespace Pogodynka_v3
             return modelNames;
 
         }
-
         public static Model identifyModel(string name)
         {
             foreach (Model model in models)
@@ -60,28 +50,28 @@ namespace Pogodynka_v3
                 }
             }
             return null;
-        } 
+        }
 
-        protected void NotifySubscribers(List<View> subscribersToNotify)
+        protected void NotifySubscribers(List<View> subscribers)
         {
             if (parameters == null) return;
-                foreach (View view in subscribersToNotify)
-                {
-                    view.updateView(parameters);
-                }
-        }
-
-        protected void threadAction()
-        {
-            while (true)
+            foreach (View view in subscribers)
             {
-                measure();
-                if (parameters != null)
-                {
-                    NotifySubscribers(subscribers);
-                }
-                Thread.Sleep(measurePeriodInMiliseconds);
+                view.updateView(parameters);
             }
         }
+
+        public void NotifySubscribers()
+        {
+            if (parameters == null) return;
+            foreach (View view in SubManager.getAllSubscribers())
+            {
+                view.updateView(parameters);
+            }
+        }
+
+
+
+
     }
 }

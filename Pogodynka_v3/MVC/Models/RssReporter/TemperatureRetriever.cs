@@ -2,61 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using System.Net;
 using System.IO;
-using System.Reflection;
+using System.Xml;
 
 namespace Pogodynka_v3
 {
-    class ReadFromRss : Model
+    public class TemperatureRetriever
     {
-        
-        private string pathToSource;
+        private string path;
 
-        public static void InitModels()
+        public TemperatureRetriever(string path)
         {
-            List<City> CitiesAvailable = LoadConfiguration("AvailableCitiesConf.xml");
-            foreach (City city in CitiesAvailable)
-            {
-                models.Add(new ReadFromRss(city.cityName, city.path));
-            }
+            this.path = path;
         }
-
-        protected override void measure()
+        public List<Temperature> getTemperatureFromRss()
         {
-            List<Temperature> results = getTemperatureFromRss();
-            if (results != null)
-                parameters = new ModelData(model_ID, results);
-
-        }
-
-        private ReadFromRss(string name, string path)
-        {
-            this.model_ID = name;
-            pathToSource = path;
-            subscribers = new List<View>();
-            measurePeriodInMiliseconds = 6000;
-            System.Threading.Thread thread = new System.Threading.Thread(threadAction);
-            thread.IsBackground = true;
-            thread.Start();
-        }
-
-        private static List<City> LoadConfiguration(string ConfigurationPath)
-        {
-            List<City> Cities = new List<City>();
-            XmlNodeList nodes = tools.XmlTools.getXmlNodes(ConfigurationPath);
-            foreach (XmlNode node in nodes)
-            {
-                Cities.Add(new City(node["City"].InnerText, node["PathToReport"].InnerText));
-            }
-            return Cities;
-        }
-
-        private List<Temperature> getTemperatureFromRss()
-        {
-            WebResponse response = Tools.WebTools.RequestConnection(pathToSource);
-            if (response == null)    
+            WebResponse response = Tools.WebTools.RequestConnection(path);
+            if (response == null)
             {
                 return null;
             }
@@ -67,7 +30,7 @@ namespace Pogodynka_v3
             foreach (XmlNode node in nodes)
             {
                 temperaturesInCity.Add(new Temperature(int.Parse(this.readTemperatureFromString(node["description"].InnerText)),
-                node["title"].InnerText)); 
+                node["title"].InnerText));
             }
             return temperaturesInCity;
         }
@@ -101,7 +64,6 @@ namespace Pogodynka_v3
                         {
                             state = States.WHITE;
                         }
-
                         break;
 
                     case States.TEMPERATURE:
@@ -170,7 +132,6 @@ namespace Pogodynka_v3
             return null;
         }
         private enum States { TEMPERATURE, WHITE, MARK, Deg, dEg, STORE, MINUS };
-
 
     }
 }

@@ -10,8 +10,7 @@ namespace Pogodynka_v3
         protected List<string> availableModels = new List<string>();
         protected View ViewUsed;
 
-        private int COMMAND_NAME = 0;
-        private int COMMAND_ARGUMENT = 1;
+        private int COMMAND_NAME = 0, COMMAND_ARGUMENT = 1;
 
         protected void executeCommand(string command)
         {
@@ -21,12 +20,12 @@ namespace Pogodynka_v3
             switch (CommandStructure[COMMAND_NAME])
             {
                 case "ADD":
-                    ModelUsed.addSubscriber(ViewUsed);
+                    ModelUsed.SubManager.addSubscriber(ViewUsed);
                     ModelUsed.requestLatestData(ViewUsed);
                     break;
 
                 case "DEL":
-                    ModelUsed.delSubscriber(ViewUsed);
+                    ModelUsed.SubManager.delSubscriber(ViewUsed);
                     ViewUsed.delDataFromView(CommandStructure[COMMAND_ARGUMENT]);
                     break;
             }
