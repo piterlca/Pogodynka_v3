@@ -22,6 +22,7 @@ namespace Pogodynka_v3
             {
                 case "ADD":
                     ModelUsed.addSubscriber(ViewUsed);
+                    ModelUsed.requestLatestData(ViewUsed);
                     break;
 
                 case "DEL":

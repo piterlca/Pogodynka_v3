@@ -14,8 +14,14 @@ namespace Pogodynka_v3
         protected List<View> subscribers; 
         protected static List<Model> models = new List<Model>();
 
-
         protected abstract void measure();
+
+        public void requestLatestData(View viewToNotify)
+        {
+            List<View> viewsToNotify = new List<View>();
+            viewsToNotify.Add(viewToNotify);
+            NotifySubscribers(viewsToNotify);
+        }
 
         public void addSubscriber(View view)
         {
@@ -56,15 +62,13 @@ namespace Pogodynka_v3
             return null;
         } 
 
-        protected void NotifySubscribers()
+        protected void NotifySubscribers(List<View> subscribersToNotify)
         {
-            lock (Globals.CriticalSection)
-            {
-                foreach (View view in subscribers)
+            if (parameters == null) return;
+                foreach (View view in subscribersToNotify)
                 {
                     view.updateView(parameters);
                 }
-            }
         }
 
         protected void threadAction()
@@ -74,7 +78,7 @@ namespace Pogodynka_v3
                 measure();
                 if (parameters != null)
                 {
-                    NotifySubscribers();
+                    NotifySubscribers(subscribers);
                 }
                 Thread.Sleep(measurePeriodInMiliseconds);
             }

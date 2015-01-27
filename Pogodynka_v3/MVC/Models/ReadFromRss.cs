@@ -5,9 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Net;
 using System.IO;
-using System.Threading;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace Pogodynka_v3
 {
@@ -27,7 +25,6 @@ namespace Pogodynka_v3
 
         protected override void measure()
         {
-            //object LastestData;
             List<Temperature> results = getTemperatureFromRss();
             if (results != null)
                 parameters = new ModelData(model_ID, results);
@@ -39,8 +36,8 @@ namespace Pogodynka_v3
             this.model_ID = name;
             pathToSource = path;
             subscribers = new List<View>();
-            measurePeriodInMiliseconds = 50;
-            Thread thread = new Thread(threadAction);
+            measurePeriodInMiliseconds = 6000;
+            System.Threading.Thread thread = new System.Threading.Thread(threadAction);
             thread.IsBackground = true;
             thread.Start();
         }
