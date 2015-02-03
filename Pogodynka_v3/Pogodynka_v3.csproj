@@ -49,8 +49,9 @@
   <ItemGroup>
     <Compile Include="DTOs\City.cs" />
     <Compile Include="DTOs\ModelData.cs" />
-    <Compile Include="DTOs\Temperature.cs" />
-    <Compile Include="DTOs\XYdata.cs" />
+    <Compile Include="DTOs\Temperature.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Globals.cs" />
     <Compile Include="MVC\Controllers\Controller.cs" />
     <Compile Include="Form1.cs">

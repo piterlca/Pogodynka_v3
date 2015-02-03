@@ -1,8 +1,8 @@
+C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\bin\Debug\Pogodynka_v3.exe
+C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\bin\Debug\Pogodynka_v3.pdb
+C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\obj\x86\Debug\Pogodynka_v3.csprojResolveAssemblyReference.cache
 C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\obj\x86\Debug\Pogodynka_v3.Form1.resources
 C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\obj\x86\Debug\Pogodynka_v3.Properties.Resources.resources
 C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\obj\x86\Debug\Pogodynka_v3.csproj.GenerateResource.Cache
-C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\bin\Debug\Pogodynka_v3.exe
-C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\bin\Debug\Pogodynka_v3.pdb
 C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\obj\x86\Debug\Pogodynka_v3.exe
 C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\obj\x86\Debug\Pogodynka_v3.pdb
-C:\Users\Piotr\workspace\Pogodynka_v3\Pogodynka_v3\obj\x86\Debug\Pogodynka_v3.csprojResolveAssemblyReference.cache

@@ -11,24 +11,9 @@ namespace Pogodynka_v3
         protected string model_ID;
         protected int measurePeriodInMiliseconds;
         protected ModelData parameters;
-        public SubscribersManager SubManager;
+        public SubscribersManager SubsManager;
         protected static List<Model> models = new List<Model>();
         protected ThreadForModels measuringThread;
-
-        public Model()
-        {
-            SubManager = new SubscribersManager();
-            measuringThread = new ThreadForModels(this, measurePeriodInMiliseconds);
-        }
-
-        public abstract void measure();
-
-        public void requestLatestData(View viewToNotify)
-        {
-            List<View> viewsToNotify = new List<View>();
-            viewsToNotify.Add(viewToNotify);
-            NotifySubscribers(viewsToNotify);
-        }
 
         public static List<string> getAvailableModels()
         {
@@ -52,6 +37,34 @@ namespace Pogodynka_v3
             return null;
         }
 
+        public Model()
+        {
+            SubsManager = new SubscribersManager();
+            measuringThread = new ThreadForModels(this, measurePeriodInMiliseconds);
+        }
+
+        public void requestLatestData(View viewToNotify)
+        {
+            List<View> viewsToNotify = new List<View>();
+            viewsToNotify.Add(viewToNotify);
+            NotifySubscribers(viewsToNotify);
+        }
+
+        public void ModelDataGetCycle()
+        {
+            measure();
+            NotifySubscribers();
+        }
+        protected abstract void measure();
+
+        public void NotifySubscribers()
+        {
+            if (parameters == null) return;
+            foreach (View view in SubsManager.getAllSubscribers())
+            {
+                view.updateView(parameters);
+            }
+        }
         protected void NotifySubscribers(List<View> subscribers)
         {
             if (parameters == null) return;
@@ -61,14 +74,13 @@ namespace Pogodynka_v3
             }
         }
 
-        public void NotifySubscribers()
-        {
-            if (parameters == null) return;
-            foreach (View view in SubManager.getAllSubscribers())
-            {
-                view.updateView(parameters);
-            }
-        }
+
+
+
+
+
+
+
 
 
 

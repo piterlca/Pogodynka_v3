@@ -8,10 +8,12 @@ namespace Pogodynka_v3
     public class SubscribersManager
     {
         private List<View> subscribers;
+
         public SubscribersManager()
         {
             subscribers = new List<View>();
         }
+
         public void addSubscriber(View view)
         {
             lock (Globals.CriticalSection)
@@ -26,6 +28,7 @@ namespace Pogodynka_v3
                 subscribers.Remove(view);
             }
         }
+
         public List<View> getAllSubscribers()
         {
             return subscribers;

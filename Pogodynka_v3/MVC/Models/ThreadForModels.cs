@@ -27,8 +27,7 @@ namespace Pogodynka_v3
         {
             while (true)
             {
-                ThreadOwner.measure();
-                ThreadOwner.NotifySubscribers();
+                ThreadOwner.ModelDataGetCycle();
                 Thread.Sleep(measurePeriodInMiliseconds);
             }
         }

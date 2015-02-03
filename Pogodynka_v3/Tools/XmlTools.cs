@@ -18,6 +18,7 @@ namespace Pogodynka_v3.tools
             XmlNodeList nodes = doc.GetElementsByTagName("item");
             return nodes;
         }
+
         public static XmlNodeList getXmlNodes(string path)
         {
             XmlTextReader reader = new XmlTextReader(path);

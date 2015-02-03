@@ -24,7 +24,7 @@ namespace Pogodynka_v3
             }
         }
 
-        public override void measure()
+        protected override void measure()
         {
             List<Temperature> results = tempRetriever.getTemperatureFromRss();
             if (results != null)

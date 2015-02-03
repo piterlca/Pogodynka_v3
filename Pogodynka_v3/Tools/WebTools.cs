@@ -19,7 +19,6 @@ namespace Pogodynka_v3.Tools
             }
             catch (System.Net.WebException)
             {
-                //System.Windows.Forms.MessageBox.Show("Server does not respond for"+path+".\nPlease try again later.");
                 return null;
             }
         }

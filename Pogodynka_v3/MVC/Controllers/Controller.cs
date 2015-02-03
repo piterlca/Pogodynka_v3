@@ -20,17 +20,16 @@ namespace Pogodynka_v3
             switch (CommandStructure[COMMAND_NAME])
             {
                 case "ADD":
-                    ModelUsed.SubManager.addSubscriber(ViewUsed);
+                    ModelUsed.SubsManager.addSubscriber(ViewUsed);
                     ModelUsed.requestLatestData(ViewUsed);
                     break;
 
                 case "DEL":
-                    ModelUsed.SubManager.delSubscriber(ViewUsed);
+                    ModelUsed.SubsManager.delSubscriber(ViewUsed);
                     ViewUsed.delDataFromView(CommandStructure[COMMAND_ARGUMENT]);
                     break;
             }
         }
-
         private string[] processCommand(string command)
         {
             string[] CommandStruct = new string[2];
